@@ -1,0 +1,74 @@
+<div class="container">
+  <div class="jumbotron text-center" style="margin-top: 20px">
+    <h2>Multi Languages</h2>
+    <!-- <div>
+       <input type="text" class="form-control" size="50" placeholder="Search" [(ngModel)]="searchTxt"> 
+    </div> -->
+  </div>
+  <hr>
+  <div>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th width="20%">
+            Keyword
+          </th>
+          <th width="30%">
+            <select class="form-control" #lang1 (change)="selectLang_1(lang1.value)">        
+              <option *ngFor="let lang of supportedLanguages" [value]="lang">{{ lang }}</option>
+            </select>
+          </th>
+          <th width="10%">
+
+          </th>
+
+          <th width="30%">
+            <select class="form-control" #lang2 (change)="selectLang_2(lang2.value)">        
+              <option *ngFor="let lang of supportedLanguages" [value]="lang">{{ lang }}</option>
+            </select>
+          </th>
+          <th width="10%">
+
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td contenteditable='true' #key>
+          </td>
+          <td contenteditable='true' #val1>
+          </td>
+          <td>
+            <span class="glyphicon glyphicon-plus text-info" (click)="addData1(key.innerText, val1.innerText)"></span>
+          </td>
+          <td contenteditable='true' #val2>
+          </td>
+          <td>
+            <span class="glyphicon glyphicon-plus text-info" (click)="addData2(key.innerText, val2.innerText)"></span>
+          </td>
+        </tr>
+        <tr *ngFor="let row of keys">
+          <td>
+            <i>{{ row.key }}</i>
+          </td>
+          <td contenteditable='true' (blur)="changeData1($event, row.key)">
+            {{ JSONObj1[row.key] }}
+          </td>
+          <td>
+            <span *ngIf="JSONObj1[row.key]" class="glyphicon glyphicon-remove text-danger" (click)="delData1($event, row.key)"></span>
+          </td>
+          <td contenteditable='true' (blur)="changeData2($event, row.key)">
+            {{ JSONObj2[row.key] }}
+          </td>
+          <td>
+            <span *ngIf="JSONObj2[row.key]" class="glyphicon glyphicon-remove text-danger" (click)="delData2($event, row.key)"></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div>
+      <button class="btn btn-success btn-sm pull-right" style="margin-left: 10px" (click)="exportData()">Export</button>
+      <button class="btn btn-info btn-sm pull-right" (click)="writeData()">Save</button>
+    </div>
+  </div>
+</div>
